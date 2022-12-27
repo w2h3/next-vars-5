@@ -14,7 +14,7 @@ console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 async function getValues() {
   const secondConfig = createClient(process.env.EDGE_CONFIG);
   const allValues = await secondConfig.getAll();
-  console.log(allValues);
+  console.log("1 " + allValues);
 }
   
   if(!isLoaded) return 'Loading';
