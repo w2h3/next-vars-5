@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import { useLoadScript } from '@react-google-maps/api'
 import Map from '../components/map';
-import { createClient } from '@vercel/edge-config';
+import { NextRequest, NextResponse } from 'next/server';
+import { get } from '@vercel/edge-config';
 
 export default function Home() {
   const {isLoaded} = useLoadScript({
@@ -11,11 +12,16 @@ export default function Home() {
 
 console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 
-async function getValues() {
-  const secondConfig = createClient(process.env.EDGE_CONFIG);
-  const allValues = await secondConfig.getAll();
-  console.log(allValues);
-}
+export default (req: NextRequest) => {
+  const configItems = await getAll();
+  return NextResponse.json({
+    values: `These are all the values in my Edge Config: ${configItems}`,
+  });
+};
+  
+export const config = {
+  runtime: 'experimental-edge',
+};
   
   if(!isLoaded) return 'Loading';
 
