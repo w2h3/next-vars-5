@@ -8,6 +8,7 @@ export default function Home() {
     libraries: ['places']
   })
 
+console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 
   if(!isLoaded) return 'Loading';
 
