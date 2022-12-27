@@ -1,6 +1,13 @@
 import Head from 'next/head'
 import { useLoadScript } from '@react-google-maps/api'
 import Map from '../components/map';
+import { NextResponse } from 'next/server';
+import { get } from '@vercel/edge-config';
+
+export async function middleware() {
+  const greeting = await get('greeting');
+  console.log(NextResponse.json(greeting));
+}
 
 export default function Home() {
   const {isLoaded} = useLoadScript({
