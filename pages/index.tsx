@@ -12,10 +12,13 @@ export default function Home() {
 console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 
 async function getValues() {
-  const secondConfig = createClient(process.env.EDGE_CONFIG);
-  const allValues = await secondConfig.getAll();
-  console.log(allValues);
+  declare global {
+    const secondConfig = createClient(process.env.EDGE_CONFIG);
+    var allValues = await secondConfig.getAll();
+  }
 }
+  
+console.log(globalThis.allValues);
   
   if(!isLoaded) return 'Loading';
 
