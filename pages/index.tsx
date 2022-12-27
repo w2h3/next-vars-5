@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useLoadScript } from '@react-google-maps/api'
 import Map from '../components/map';
+import { createClient } from '@vercel/edge-config';
 
 export default function Home() {
   const {isLoaded} = useLoadScript({
@@ -10,6 +11,10 @@ export default function Home() {
 
 console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 
+const secondConfig = createClient(process.env.EDGE_CONFIG);
+const allValues = await secondConfig.getAll();
+console.log(allValues);
+  
   if(!isLoaded) return 'Loading';
 
   return (
