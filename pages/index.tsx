@@ -17,6 +17,8 @@ async function getValues() {
   console.log(allValues);
 }
   
+console.log(allValues);
+  
   if(!isLoaded) return 'Loading';
 
   return (
